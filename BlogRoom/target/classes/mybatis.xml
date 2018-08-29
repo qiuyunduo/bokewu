@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--为一个实体类取别名，在任意位置均可使用该别名代替该实体类-->
+    <typeAliases>
+        <typeAlias type="entity.User" alias="User"/>
+        <typeAlias type="entity.Article" alias="Article"/>
+    </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+</configuration>

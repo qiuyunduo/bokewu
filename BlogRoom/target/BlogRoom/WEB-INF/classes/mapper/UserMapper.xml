@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserMapper">
+  <resultMap id="BaseResultMap" type="entity.User">
+
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_birthday" jdbcType="TIMESTAMP" property="userBirthday" />
+    <result column="user_mark" jdbcType="INTEGER" property="userMark" />
+    <result column="user_description" jdbcType="VARCHAR" property="userDescription" />
+    <result column="user_image_url" jdbcType="VARCHAR" property="userImageUrl" />
+    <result column="user_register_time" jdbcType="TIMESTAMP" property="userRegisterTime" />
+    <result column="user_last_update_time" jdbcType="TIMESTAMP" property="userLastUpdateTime" />
+    <result column="user_lock" jdbcType="TINYINT" property="userLock" />
+    <result column="user_rank_id" jdbcType="INTEGER" property="userRankId" />
+    <result column="isadmin" jdbcType="TINYINT" property="isadmin" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    user_id, user_name, user_pwd, user_sex, user_email, user_birthday, user_mark, user_description, 
+    user_image_url, user_register_time, user_last_update_time, user_lock,
+    user_rank_id, isadmin
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+
+  <select id="selectFashionUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    order by user_register_time desc
+    limit 0,10;
+  </select>
+
+  <select id="selectByNamePwd" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name=#{name,jdbcType=VARCHAR} AND
+          user_pwd=#{pwd,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAdmin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name=#{name,jdbcType=VARCHAR}
+    AND user_pwd=#{pwd,jdbcType=VARCHAR}
+    AND isadmin=1;
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{name,jdbcType=VARCHAR}
+    AND user_id != #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+  <!--<insert id="insert" parameterType="entity.User">-->
+    <!--insert into user (user_id, user_name, user_pwd, -->
+      <!--user_sex, user_email, user_birthday, -->
+      <!--user_mark, user_description, user_image_url, -->
+      <!--user_register_time, user_last_update_time, -->
+      <!--user_says, user_lock, user_rank_id, -->
+      <!--isadmin)-->
+    <!--values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, -->
+      <!--#{userSex,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userBirthday,jdbcType=INTEGER}, -->
+      <!--#{userMark,jdbcType=INTEGER}, #{userDescription,jdbcType=VARCHAR}, #{userImageUrl,jdbcType=VARCHAR}, -->
+      <!--#{userRegisterTime,jdbcType=TIMESTAMP}, #{userLastUpdateTime,jdbcType=TIMESTAMP}, -->
+      <!--#{userSays,jdbcType=VARCHAR}, #{userLock,jdbcType=TINYINT}, #{userRankId,jdbcType=INTEGER}, -->
+      <!--#{isadmin,jdbcType=TINYINT})-->
+  <!--</insert>-->
+  <insert id="insertOne" parameterType="entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userBirthday != null">
+        user_birthday,
+      </if>
+      <if test="userMark != null">
+        user_mark,
+      </if>
+      <if test="userDescription != null">
+        user_description,
+      </if>
+      <if test="userImageUrl != null">
+        user_image_url,
+      </if>
+      <if test="userRegisterTime != null">
+        user_register_time,
+      </if>
+      <if test="userLastUpdateTime != null">
+        user_last_update_time,
+      </if>
+      <if test="userLock != null">
+        user_lock,
+      </if>
+      <if test="userRankId != null">
+        user_rank_id,
+      </if>
+      <if test="isadmin != null">
+        isadmin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        #{userBirthday,jdbcType=INTEGER},
+      </if>
+      <if test="userMark != null">
+        #{userMark,jdbcType=INTEGER},
+      </if>
+      <if test="userDescription != null">
+        #{userDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="userImageUrl != null">
+        #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegisterTime != null">
+        #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLastUpdateTime != null">
+        #{userLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLock != null">
+        #{userLock,jdbcType=TINYINT},
+      </if>
+      <if test="userRankId != null">
+        #{userRankId,jdbcType=INTEGER},
+      </if>
+      <if test="isadmin != null">
+        #{isadmin,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <!--<select id="countByExample" parameterType="entity.UserExample" resultType="java.lang.Long">-->
+    <!---->
+    <!--select count(*) from user-->
+  <!--</select>-->
+
+  <update id="updateBySelective" parameterType="entity.User">
+    update user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        user_birthday = #{userBirthday,jdbcType=INTEGER},
+      </if>
+      <if test="userMark != null">
+        user_mark = #{userMark,jdbcType=INTEGER},
+      </if>
+      <if test="userDescription != null">
+        user_description = #{userDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="userImageUrl != null">
+        user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegisterTime != null">
+        user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLastUpdateTime != null">
+        user_last_update_time = #{userLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLock != null">
+        user_lock = #{userLock,jdbcType=TINYINT},
+      </if>
+      <if test="userRankId != null">
+        user_rank_id = #{userRankId,jdbcType=INTEGER},
+      </if>
+      <if test="isadmin != null">
+        isadmin = #{isadmin,jdbcType=TINYINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <!--<update id="updateBySelective" parameterType="entity.User">-->
+    <!--update user-->
+    <!--set user_name = #{userName,jdbcType=VARCHAR},-->
+      <!--user_pwd = #{userPwd,jdbcType=VARCHAR},-->
+      <!--user_sex = #{userSex,jdbcType=VARCHAR},-->
+      <!--user_email = #{userEmail,jdbcType=VARCHAR},-->
+      <!--user_birthday = #{userBirthday,jdbcType=INTEGER},-->
+      <!--user_mark = #{userMark,jdbcType=INTEGER},-->
+      <!--user_description = #{userDescription,jdbcType=VARCHAR},-->
+      <!--user_image_url = #{userImageUrl,jdbcType=VARCHAR},-->
+      <!--user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},-->
+      <!--user_last_update_time = #{userLastUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--user_says = #{userSays,jdbcType=VARCHAR},-->
+      <!--user_lock = #{userLock,jdbcType=TINYINT},-->
+      <!--user_rank_id = #{userRankId,jdbcType=INTEGER},-->
+      <!--isadmin = #{isadmin,jdbcType=TINYINT}-->
+    <!--where user_id = #{userId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

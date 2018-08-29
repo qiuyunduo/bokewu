@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="entity.Comment">
+    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="comment_article_id" jdbcType="BIGINT" property="commentArticleId" />
+    <result column="comment_author_id" jdbcType="INTEGER" property="commentAuthorId" />
+    <result column="comment_date" jdbcType="TIMESTAMP" property="commentDate" />
+    <result column="comment_floor" jdbcType="INTEGER" property="commentFloor" />
+    <result column="comment_content" jdbcType="LONGVARCHAR" property="commentContent" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    comment_id, comment_article_id, comment_author_id, comment_date, comment_floor,comment_content
+  </sql>
+
+  <select id="selectOneByCid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comments
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAllByAid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comments
+    where comment_article_id = #{aid,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByCid" parameterType="java.lang.Long">
+    delete from comments
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertOne" parameterType="entity.Comment">
+    insert into comments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+
+      <if test="commentArticleId != null">
+        comment_article_id,
+      </if>
+
+      <if test="commentAuthorId != null">
+        comment_author_id,
+      </if>
+
+      <if test="commentDate != null">
+        comment_date,
+      </if>
+
+      <if test="commentFloor != null">
+        comment_floor,
+      </if>
+
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="commentArticleId != null">
+        #{commentArticleId,jdbcType=BIGINT},
+      </if>
+      <if test="commentAuthorId != null">
+        #{commentAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentFloor != null">
+        #{commentFloor,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByComment" parameterType="entity.Comment">
+    update comments
+    <set>
+      <if test="commentArticleId != null">
+        comment_article_id = #{commentArticleId,jdbcType=BIGINT},
+      </if>
+      <if test="commentAuthorId != null">
+        comment_author_id = #{commentAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="commentDate != null">
+        comment_date = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentFloor != null">
+        comment_floor = #{commentFloor,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+</mapper>

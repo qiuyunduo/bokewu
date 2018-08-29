@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AttentionMapper">
+  <resultMap id="BaseResultMap" type="entity.Attention">
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="attention_id" jdbcType="INTEGER" property="attentionId" />
+    <result column="attentioned_id" jdbcType="INTEGER" property="attentionedId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    a_id, attention_id, attentioned_id
+  </sql>
+
+  <select id="selectAllOfGid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select 
+    attentioned_id
+    from attention
+    where attention_id = #{Gid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllOfFid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    attention_id
+    from attention
+    where attentioned_id = #{Fid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteBySelective" parameterType="entity.Attention">
+    delete from attention
+    where attention_id=#{attentionId}
+    AND attentioned_id=#{attentionedId}
+  </delete>
+
+
+  <insert id="insertOne" parameterType="entity.Attention">
+    insert into attention
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="attentionId != null">
+        attention_id,
+      </if>
+      <if test="attentionedId != null">
+        attentioned_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=SMALLINT},
+      </if>
+      <if test="attentionId != null">
+        #{attentionId,jdbcType=INTEGER},
+      </if>
+      <if test="attentionedId != null">
+        #{attentionedId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
