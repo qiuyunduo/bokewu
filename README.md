@@ -7,4 +7,4 @@
     就有许多博客网站出现，像博客园、CSDN,而本项目就是类似此类的博客网站。将自己的遇到的问题，和解决方案上传到网上，作为自己学习记录，方便给遇到
     相同问题的人可以看到自己解决问题的过程，实现知识和经验共享的目的
 
-    <img src="BlogRoom/target/BlogRoom/images/001.png"/>
+<img src="BlogRoom/target/BlogRoom/images/001.png"/>
