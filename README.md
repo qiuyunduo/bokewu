@@ -12,6 +12,16 @@
    spring+springmvc+myabtis+mysql+redis+html+jquery+ajax
    
 ## 四、项目截图
-![image](BlogRoom/target/BlogRoom/images/001.png)
+网站主页：
+![image](jietu/main.png)
+
+文章页面：
+![image](jietu/article.png)
+
+用户博客空间：
+![image](jietu/blogInfo.png)
+
+网站主页：
+![image](jietu/main.png)
 
 
