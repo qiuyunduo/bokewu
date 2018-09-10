@@ -12,6 +12,7 @@
    spring+springmvc+myabtis+mysql+redis+html+jquery+ajax
    
 ## 四、项目截图
+# 前台
 网站主页：
 ![image](jietu/main.png)
 
@@ -21,7 +22,26 @@
 用户博客空间：
 ![image](jietu/blogInfo.png)
 
-网站主页：
-![image](jietu/main.png)
+用户管理博客：
+![image](jietu/managerBlog.png)
+
+用户管理关注：
+![image](jietu/attention.png)
+
+用户写文章：
+![image](jietu/writeBlog.png)
+
+# 后台
+
+管理待审核文章：
+![image](jietu/unckecked.png)
+
+管理已发布的文章
+![image](jietu/checked.png)
+
+管理用户：
+![image](jietu/managerUser.png)
+
+
 
 
