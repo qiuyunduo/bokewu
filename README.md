@@ -32,7 +32,7 @@
 ![image](jietu/blogInfo.png)
 
 用户管理博客：
-![image](jietu/managerBlog.png)
+![image](jietu/manageblog.png)
 
 用户管理关注：
 ![image](jietu/attention.png)
