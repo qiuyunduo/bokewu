@@ -9,7 +9,7 @@
 ## 二、开发环境
     jdk1.8+intellij idea+maven
 ## 三、技术选用
-   spring+springmvc+myabtis+mysql+redis+html+jquery+ajax
+   spring+springmvc+mybatis+mysql+redis+html+jquery+ajax
 ## 四、项目功能模块
    1、用户的注册与登录<br>
    2、文章的搜索与浏览<br>
